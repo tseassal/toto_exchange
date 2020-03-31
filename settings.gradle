@@ -1,1 +1,3 @@
 rootProject.name = 'toto_exchange'
+include 'model'
+
