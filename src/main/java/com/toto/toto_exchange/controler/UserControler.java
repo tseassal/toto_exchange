@@ -15,13 +15,14 @@ public class UserControler {
     UserServiceDB userModel;
 
     @PostMapping("/user/add")
-    private long create(@RequestParam String userName, @RequestParam String password, @RequestParam UserAuth auth){
+    long create(@RequestParam String userName, @RequestParam String password, @RequestParam UserAuth auth){
         User u = new User();
         u.setUsername(userName);
         u.setPassword(password);
         u.setAuthority(auth);
         return userModel.add(u);
     }
+
     @PutMapping("/user/edit")
     User edit(@RequestBody User user){
         return userModel.edit(user).orElseThrow(() -> new IllegalArgumentException("User not found"));
@@ -40,5 +41,13 @@ public class UserControler {
     @GetMapping("/user/name")
     Collection<User> getByName(String username){
         return userModel.getByName(username);
+    }
+
+    @GetMapping("/user/special")
+    Collection<User> userQuery(String select, String from, String where){ return userModel.userQuery(select,from,where);}
+
+    @GetMapping("/user/try")
+    void toDelete(long id, String name){
+        userModel.toto(id, name);
     }
 }
